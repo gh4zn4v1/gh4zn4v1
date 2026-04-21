@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🅿️AKISTANI COMPANIES</title>
+    <title>CAR MODS PAKISTAN</title>
     <style>
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -11,103 +11,124 @@
             color: #333; 
         }
         .container { 
-            max-width: 500px; 
-            margin: 40px auto; 
+            max-width: 650px; 
+            margin: 20px auto; 
             background: white; 
             padding: 25px; 
             border-radius: 12px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
         }
-        h2 { 
-            text-align: center; 
-            color: #2c3e50; 
-            border-bottom: 2px solid #eee; 
-            padding-bottom: 10px; 
-            margin-top: 0;
+        h2 { text-align: center; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
         }
-        .input-group { margin-bottom: 20px; }
-        label { 
-            display: block; 
-            margin-bottom: 8px; 
-            font-weight: bold; 
-            font-size: 0.9em; 
-            color: #555;
-        }
+
+        .input-group { margin-bottom: 10px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.85em; color: #555; }
         select { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ccc; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-size: 1em; 
-            background-color: #fff;
-            cursor: pointer;
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; 
+            font-size: 0.95em; background-color: #fff; cursor: pointer;
         }
-        select:focus {
-            outline: none;
-            border-color: #3498db;
+
+        /* Modifications Table Styling */
+        .mods-section { margin-top: 30px; display: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #3498db; color: white; border-radius: 4px 4px 0 0; }
+        .mod-category { font-weight: bold; color: #2c3e50; width: 30%; }
+        .mod-list { color: #555; font-size: 0.9em; }
+        .status-badge { 
+            background: #27ae60; color: white; padding: 2px 8px; 
+            border-radius: 10px; font-size: 0.75em; 
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🅿️AKISTANI COMPANIES</h2>
+    <h2>🅿️AKISTANI CAR MODS</h2>
 
-    <div class="input-group">
-        <label for="car-make">MAKE</label>
-        <select id="car-make" onchange="updateModels()">
-            <option value="">Select Manufacturer</option>
-            <option value="Toyota">Toyota (Indus Motors)</option>
-            <option value="Honda">Honda Atlas</option>
-            <option value="Suzuki">Suzuki Pakistan</option>
-            <option value="Kia">Kia Lucky Motors</option>
-            <option value="Hyundai">Hyundai Nishat</option>
-            <option value="Changan">Changan Pakistan</option>
-            <option value="MG">MG Motors</option>
-        </select>
+    <div class="form-grid">
+        <div class="input-group">
+            <label>MAKE</label>
+            <select id="car-make" onchange="updateModels()">
+                <option value="">Manufacturer</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Honda">Honda</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Kia">Kia</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Changan">Changan</option>
+                <option value="MG">MG</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>MODEL</label>
+            <select id="car-model" onchange="showMods()">
+                <option value="">Select Make First</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>YEAR</label>
+            <select id="car-year">
+                </select>
+        </div>
     </div>
 
-    <div class="input-group">
-        <label for="car-model">MODEL</label>
-        <select id="car-model">
-            <option value="">Please select a make first</option>
-        </select>
+    <div id="mods-section" class="mods-section">
+        <h3 id="selected-car-title" style="color: #3498db; font-size: 1.1em;">Available Mods</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Popular Upgrades</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="mods-body">
+                </tbody>
+        </table>
     </div>
 </div>
 
 <script>
-    // Data object containing Pakistani car models
+    // 1. Populate Year Dropdown (1990 to 2026)
+    const yearSelect = document.getElementById("car-year");
+    for(let i = 2026; i >= 1990; i--) {
+        let opt = document.createElement("option");
+        opt.value = i;
+        opt.innerHTML = i;
+        yearSelect.appendChild(opt);
+    }
+
+    // 2. Car Data & Specific Mods
     const carData = {
-        "Toyota": ["Corolla", "Yaris", "Corolla Cross (Hybrid)", "Fortuner", "Hilux Revo", "Land Cruiser", "Camry"],
-        "Honda": ["Civic", "City", "HR-V", "BR-V", "Accord"],
-        "Suzuki": ["Alto", "Cultus", "Swift", "Wagon R", "Every", "Jimny", "Fronx"],
-        "Kia": ["Sportage", "Picanto", "Stonic", "Sorento", "Carnival"],
-        "Hyundai": ["Tucson", "Elantra", "Sonata", "Santa Fe", "Porter H-100"],
-        "Changan": ["Alsvin", "Oshan X7", "Karvaan", "M9 Sherpa"],
-        "MG": ["HS", "ZS", "MG 3", "MG 4 (EV)", "MG GT"]
+        "Toyota": ["Corolla", "Yaris", "Fortuner", "Hilux Revo", "Land Cruiser"],
+        "Honda": ["Civic", "City", "HR-V", "BR-V"],
+        "Suzuki": ["Alto", "Cultus", "Swift", "Wagon R", "Every"],
+        "Kia": ["Sportage", "Picanto", "Stonic", "Sorento"],
+        "Hyundai": ["Tucson", "Elantra", "Sonata", "Santa Fe"],
+        "Changan": ["Alsvin", "Oshan X7", "Karvaan"],
+        "MG": ["HS", "ZS", "MG 3", "MG GT"]
     };
 
-    function updateModels() {
-        const makeSelect = document.getElementById("car-make");
-        const modelSelect = document.getElementById("car-model");
-        const selectedMake = makeSelect.value;
-
-        // Clear existing options
-        modelSelect.innerHTML = '<option value="">Select Model</option>';
-
-        if (selectedMake && carData[selectedMake]) {
-            carData[selectedMake].forEach(model => {
-                let option = document.createElement("option");
-                option.value = model.toLowerCase().replace(/\s+/g, '-');
-                option.text = model;
-                modelSelect.appendChild(option);
-            });
-        } else {
-            modelSelect.innerHTML = '<option value="">Please select a make first</option>';
-        }
-    }
-</script>
-
-</body>
-</html>
+    const modTemplates = {
+        sedan: [
+            { cat: "Exterior", items: "Lip Kit, Trunk Spoiler, Chrome Delete, Window Tints" },
+            { cat: "Lighting", items: "LED Headlight Upgrade, Fog Lamps, Ambient Interior Lighting" },
+            { cat: "Performance", items: "Lowering Springs, High-Flow Air Filter, Alloy Rims" }
+        ],
+        suv: [
+            { cat: "Off-Road", items: "Bull Bars, Snorkel, All-Terrain Tires, Roof Racks" },
+            { cat: "Protection", items: "Ceramic Coating, Paint Protection Film (PPF), Weather Shields" },
+            { cat: "Interior", items: "7D Floor Mats, Android Panel Upgrade, Tesla Screen" }
+        ],
+        hatchback: [
+            { cat: "Aesthetics", items: "Alloy Rims, Body Wraps, Sporty Spoilers" },
+            { cat: "Gadgets", items: "Reverse Camera, Parking Sensors
