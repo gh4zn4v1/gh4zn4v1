@@ -2,55 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CAR MODS PAKISTAN</title>
+    <title>PAKISTANI CAR MODS 2026</title>
     <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background-color: #f4f7f6; 
-            padding: 20px; 
-            color: #333; 
-        }
-        .container { 
-            max-width: 650px; 
-            margin: 20px auto; 
-            background: white; 
-            padding: 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-        }
+        body { font-family: -apple-system, sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
+        .container { max-width: 700px; margin: 20px auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h2 { text-align: center; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 25px; }
         .input-group { margin-bottom: 10px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.85em; color: #555; }
-        select { 
-            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; 
-            font-size: 0.95em; background-color: #fff; cursor: pointer;
-        }
-
-        /* Modifications Table Styling */
+        select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 0.95em; cursor: pointer; }
         .mods-section { margin-top: 30px; display: none; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
-        th { background-color: #3498db; color: white; border-radius: 4px 4px 0 0; }
-        .mod-category { font-weight: bold; color: #2c3e50; width: 30%; }
-        .mod-list { color: #555; font-size: 0.9em; }
-        .status-badge { 
-            background: #27ae60; color: white; padding: 2px 8px; 
-            border-radius: 10px; font-size: 0.75em; 
-        }
+        th { background-color: #3498db; color: white; }
+        .status-badge { background: #27ae60; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🅿️AKISTANI CAR MODS</h2>
+    <h2>PAKISTANI CAR MODS</h2>
 
     <div class="form-grid">
         <div class="input-group">
@@ -82,7 +53,7 @@
     </div>
 
     <div id="mods-section" class="mods-section">
-        <h3 id="selected-car-title" style="color: #3498db; font-size: 1.1em;">Available Mods</h3>
+        <h3 id="selected-car-title" style="color: #3498db;">Available Mods</h3>
         <table>
             <thead>
                 <tr>
@@ -91,23 +62,20 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody id="mods-body">
-                </tbody>
+            <tbody id="mods-body"></tbody>
         </table>
     </div>
 </div>
 
 <script>
-    // 1. Populate Year Dropdown (1990 to 2026)
+    // 1. Populate Year Dropdown
     const yearSelect = document.getElementById("car-year");
     for(let i = 2026; i >= 1990; i--) {
         let opt = document.createElement("option");
-        opt.value = i;
-        opt.innerHTML = i;
+        opt.value = opt.innerHTML = i;
         yearSelect.appendChild(opt);
     }
 
-    // 2. Car Data & Specific Mods
     const carData = {
         "Toyota": ["Corolla", "Yaris", "Fortuner", "Hilux Revo", "Land Cruiser"],
         "Honda": ["Civic", "City", "HR-V", "BR-V"],
@@ -120,15 +88,64 @@
 
     const modTemplates = {
         sedan: [
-            { cat: "Exterior", items: "Lip Kit, Trunk Spoiler, Chrome Delete, Window Tints" },
-            { cat: "Lighting", items: "LED Headlight Upgrade, Fog Lamps, Ambient Interior Lighting" },
-            { cat: "Performance", items: "Lowering Springs, High-Flow Air Filter, Alloy Rims" }
+            { cat: "Body", items: "Facelift Conversion (Grande/RS), Lip Kits, Trunk Spoilers" },
+            { cat: "Tech", items: "Android Multimedia Panel, Tesla Screen, 360 Camera" },
+            { cat: "Stance", items: "Alloy Rims (16/17 inch), Lowering Springs" }
         ],
         suv: [
-            { cat: "Off-Road", items: "Bull Bars, Snorkel, All-Terrain Tires, Roof Racks" },
-            { cat: "Protection", items: "Ceramic Coating, Paint Protection Film (PPF), Weather Shields" },
-            { cat: "Interior", items: "7D Floor Mats, Android Panel Upgrade, Tesla Screen" }
+            { cat: "Exterior", items: "Legender/Rocco Conversion, Bull Bars, Side Steps" },
+            { cat: "Protection", items: "Paint Protection Film (PPF), Ceramic Coating" },
+            { cat: "Interior", items: "9D Floor Mats, Leather Seat Covers, Ambient Lighting" }
         ],
         hatchback: [
-            { cat: "Aesthetics", items: "Alloy Rims, Body Wraps, Sporty Spoilers" },
-            { cat: "Gadgets", items: "Reverse Camera, Parking Sensors
+            { cat: "Essentials", items: "Power Windows Upgrade, Center Locking, Security Alarms" },
+            { cat: "Aesthetics", items: "Wheel Caps/Alloys, Roof Rails, Fog Lamps" },
+            { cat: "Comfort", items: "Armrest Console, Sound Proofing (Damping Sheets)" }
+        ]
+    };
+
+    function updateModels() {
+        const make = document.getElementById("car-make").value;
+        const modelSelect = document.getElementById("car-model");
+        modelSelect.innerHTML = '<option value="">Select Model</option>';
+        
+        if (make) {
+            carData[make].forEach(m => {
+                let opt = document.createElement("option");
+                opt.value = m; opt.innerHTML = m;
+                modelSelect.appendChild(opt);
+            });
+        }
+        document.getElementById("mods-section").style.display = "none";
+    }
+
+    function showMods() {
+        const make = document.getElementById("car-make").value;
+        const model = document.getElementById("car-model").value;
+        const modsSection = document.getElementById("mods-section");
+        const modsBody = document.getElementById("mods-body");
+        
+        if (!model) return;
+
+        let type = "sedan";
+        const suvList = ["Fortuner", "Hilux Revo", "Land Cruiser", "Sportage", "Tucson", "Oshan X7", "HS", "ZS", "Santa Fe", "Sorento"];
+        const hatchbackList = ["Alto", "Cultus", "Swift", "Wagon R", "Every", "Picanto", "MG 3"];
+        
+        if (suvList.includes(model)) type = "suv";
+        else if (hatchbackList.includes(model)) type = "hatchback";
+
+        document.getElementById("selected-car-title").innerHTML = `Recommended for ${make} ${model}`;
+        modsBody.innerHTML = "";
+        
+        modTemplates[type].forEach(mod => {
+            modsBody.innerHTML += `<tr>
+                <td><b>${mod.cat}</b></td>
+                <td>${mod.items}</td>
+                <td><span class="status-badge">Available</span></td>
+            </tr>`;
+        });
+        modsSection.style.display = "block";
+    }
+</script>
+</body>
+</html>
